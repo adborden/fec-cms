@@ -85,6 +85,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'fec.context.show_settings',
+                'fec.context.features',
             ],
         },
     },
@@ -176,6 +177,13 @@ ENVIRONMENTS = {
 FEC_CMS_ENVIRONMENT = ENVIRONMENTS.get(os.getenv('FEC_CMS_ENVIRONMENT'), 'DEVELOPMENT')
 CONTACT_EMAIL = 'betafeedback@fec.gov';
 CONSTANTS = constants
+
+def feature_enabled(feature):
+    return os.getenv(feature, False) == '1'
+
+FEATURES = {
+    'search': feature_enabled('FEC_CMS_FEATURE_SEARCH')
+}
 
 if os.getenv('SENTRY_DSN'):
     INSTALLED_APPS += ('raven.contrib.django.raven_compat', )

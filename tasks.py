@@ -75,14 +75,8 @@ DEPLOY_RULES = (
     ('prod', _detect_prod),
     ('stage', lambda _, branch: branch.startswith('release')),
     ('dev', lambda _, branch: branch == 'develop'),
+    ('feature', lambda _, branch: branch.startswith('feature')),
 )
-
-
-SPACE_URLS = {
-    'dev': [('18f.gov', 'fec-dev-cms')],
-    'stage': [('18f.gov', 'fec-stage-cms')],
-    'prod': [('18f.gov', 'fec-prod-cms')],
-}
 
 
 @task
